@@ -18,26 +18,6 @@ let serviceReportSchema= new Schema({
         type: Date,
         required: [true,`End date is required`]
     }
-    // startService:{
-    //     date:{
-    //         type:String,
-    //         required : [true, `Start date is required`]
-    //     },
-    //     time:{
-    //         type:String,
-    //         required:[true, `Start time is required`]
-    //     }
-    // },
-    // endService:{
-    //     date:{
-    //         type:String,
-    //         required : [true, `End date is required`]
-    //     },
-    //     time:{
-    //         type:String,
-    //         required:[true, `End time is required`]
-    //     }
-    // },
 })
 
 export default mongoose.model('ServiceReport',serviceReportSchema);

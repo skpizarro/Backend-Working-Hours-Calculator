@@ -1,6 +1,7 @@
 import express from 'express';
 import logger from 'morgan'
 import config from './config/config';
+import mongo from './config/db/index'
 import routes from './routes/index.routes'
 
 

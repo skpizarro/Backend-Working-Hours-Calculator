@@ -9,18 +9,18 @@ const createServiceReport = async(req,res)=>{
         const newStartService = new Date(startService),
             newEndService = new Date(endService)
 
-        const serviceReportDb ={
+        const serviceReportDb =new ServiceReport({
             idTechnician,
             idService,
             startService: newStartService,
-            endService: newEndService
-        }
+            endService: newEndService,
+        });
 
-        await ServiceReport.create(serviceReportDb);
+        await serviceReportDb.save();
 
         res.status(200).json({
             ok:true,
-            message: `Reporte de servicio fue realizado con exito`
+            message: `Reporte de servicio técnico fue realizado con éxito`
         })
 
     }catch(err){
