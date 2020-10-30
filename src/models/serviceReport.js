@@ -20,5 +20,6 @@ let serviceReportSchema= new Schema({
     }
 })
 
+
 export default mongoose.model('ServiceReport',serviceReportSchema);
 

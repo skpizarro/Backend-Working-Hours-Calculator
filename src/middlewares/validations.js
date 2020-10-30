@@ -24,6 +24,7 @@ const validDate = (value,req) =>{
 
 const validFormat =(value,req)=>{
     if(value != undefined && value != ''){
+        console.log(value)
         const matchDate = value.match(/^((\d{2}|\d{4})[\/|\.|-](\d{2})[\/|\.|-](\d{4}|\d{2}) (\d{2}):(\d{2}):(\d{2}))$/);
         if(!matchDate) throw new Error('Formato de Fecha invalida -> dd/MM/yyyy HH:mm:ss  o dd-MM-yyyy HH:mm:ss');
         
