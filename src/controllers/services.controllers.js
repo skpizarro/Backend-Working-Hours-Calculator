@@ -22,6 +22,7 @@ const createServiceReport = async(req,res)=>{
         // console.log(strStart);
 
         // Cambiamos el formato a MM/dd/yyyy Hh:Mm:Ss antes de insertar en la bd
+        
         newStartService = new Date(srtStart);
         newEndService = new Date(srtEnd);
 
@@ -35,8 +36,8 @@ const createServiceReport = async(req,res)=>{
             endService: newEndService,
         });
 
-        // primero revisamos si ya existe
-        const resp = await ServiceReport.findOne({idTechnician,idService,startService:newStartService,endService:newEndService})
+        // primero revisamos si ya existe el reporte para ese servicio
+        let resp = await ServiceReport.findOne({idTechnician,idService,startService:newStartService,endService:newEndService})
         
         if(resp){
             return res.status(400).json({
@@ -45,7 +46,29 @@ const createServiceReport = async(req,res)=>{
                 service:resp
             })
         }
+            
+        // consultamos todos los servicios que ha hecho el tecnico
+        
+        resp = await ServiceReport.find({idTechnician});
+        let flag = false;
+        
+        // en cada servicio miramos si la fecha
+        resp.forEach(s => {
+            if((newStartService > s.startService && newStartService < s.endService)||(newEndService > s.startService && newEndService < s.endService)){
+                console.log("Ya habias trabajado en ese rango de tiempo")
+                flag = true;
+                return false;
+            }
+        });
 
+        if(flag){
+            return res.status(400).json({
+                ok:false,
+                message: `No es posible reportar un servicio en un mismo rango de tiempo en que ya ha trabajado`,
+            })
+        }
+        
+        
         await serviceReportDb.save();
 
         return res.status(200).json({
