@@ -14,9 +14,13 @@ const createServiceReport = async(req,res)=>{
         // funcion para agregar ceros
         let hourLeadingZero = num=>('0'+num).slice(-2);
 
-        let srtStart =`${hourLeadingZero(newStartService.getDate())}/${hourLeadingZero(newStartService.getMonth()+1)}/${hourLeadingZero(newStartService.getFullYear())} ${hourLeadingZero(newStartService.getHours())}:${hourLeadingZero(newStartService.getMinutes())}:${hourLeadingZero(newStartService.getSeconds())}`;
-        let srtEnd =`${hourLeadingZero(newEndService.getDate())}/${hourLeadingZero(newEndService.getMonth()+1)}/${hourLeadingZero(newEndService.getFullYear())} ${hourLeadingZero(newEndService.getHours())}:${hourLeadingZero(newEndService.getMinutes())}:${hourLeadingZero(newEndService.getSeconds())}`;
+        let srtStart =`${hourLeadingZero(newStartService.getMonth()+1)}/${hourLeadingZero(newStartService.getDate())}/${hourLeadingZero(newStartService.getFullYear())} ${hourLeadingZero(newStartService.getHours())}:${hourLeadingZero(newStartService.getMinutes())}:${hourLeadingZero(newStartService.getSeconds())}`;
+        let srtEnd =`${hourLeadingZero(newEndService.getMonth()+1)}/${hourLeadingZero(newEndService.getDate())}/${hourLeadingZero(newEndService.getFullYear())} ${hourLeadingZero(newEndService.getHours())}:${hourLeadingZero(newEndService.getMinutes())}:${hourLeadingZero(newEndService.getSeconds())}`;
         
+        // let srtStart =`${newStartService.getMonth()+1}/${newStartService.getDate()}/${newStartService.getFullYear()} ${newStartService.getHours()}:${newStartService.getMinutes()}:${newStartService.getSeconds()}`;
+        // let srtEnd =`${newEndService.getMonth()+1}/${newEndService.getDate()}/${newEndService.getFullYear()} ${newEndService.getHours()}:${newEndService.getMinutes()}:${newEndService.getSeconds()}`;
+        // console.log(strStart);
+
         // Cambiamos el formato a MM/dd/yyyy Hh:Mm:Ss antes de insertar en la bd
         newStartService = new Date(srtStart);
         newEndService = new Date(srtEnd);

@@ -1,4 +1,5 @@
-const { validationResult } = require("express-validator");
+import {validationResult} from 'express-validator';
+import moment from 'moment'
 
 const validate = validations =>{
     return async (req,res,next) =>{
@@ -18,19 +19,24 @@ const validate = validations =>{
 }
 
 const validDate = (value,req) =>{
+    
     return validFormat(value,req);
     
 }
 
 const validFormat =(value,req)=>{
-    if(value != undefined && value != ''){
-        console.log(value)
-        const matchDate = value.match(/^((\d{2}|\d{4})[\/|\.|-](\d{2})[\/|\.|-](\d{4}|\d{2}) (\d{2}):(\d{2}):(\d{2}))$/);
-        if(!matchDate) throw new Error('Formato de Fecha invalida -> dd/MM/yyyy HH:mm:ss  o dd-MM-yyyy HH:mm:ss');
-        
-        if(value === req.body.startService)startEndDateValidation(req);
-    }
-    return true;
+    
+        if(value != undefined && value != ''){
+            //console.log(moment(value).isValid());
+            
+            if(!(moment(value,"YYYY-MM-DD").isValid())) throw new Error('Formato de Fecha invalida - yyyy/MM/dd HH:mm:ss  o yyyy-MM-dd HH:mm:ss');
+            // const matchDate = value.match(/^\d{4}([\-/.])(0?[1-9]|1[1-2])\1(3[01]|[12][0-9]|0?[1-9])$/);
+
+            //if(!matchDate) throw new Error('Formato de Fecha invalida -> dd/MM/yyyy HH:mm:ss  o dd-MM-yyyy HH:mm:ss');
+            if(value === req.body.startService)startEndDateValidation(req);
+        }
+        return true;
+    
 }
 
 const startEndDateValidation = req =>{

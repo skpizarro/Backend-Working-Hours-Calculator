@@ -5,6 +5,7 @@ import {validate} from '../middlewares/validations'
 
 const router = express.Router();
 
+
 router.get('/',validate([
     check('idTechnician','La identificación del técnico es requerida').notEmpty(),
     //check('year',`El año es requerido, debe ser un número entero entre (1997 y ${new Date().getFullYear()})`).isInt({min:1997 , max: new Date().getFullYear()}),
