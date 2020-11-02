@@ -3,7 +3,7 @@ import {calculate} from './calculateMethods'
 
 const getWorkingHours = async(req,res)=>{
     try{
-        const {idTechnician,weekNumber}=req.body;
+        const {idTechnician,weekNumber}=req.query;
 
         // Consultamos todos los servicios realizados por el técnico
         const services = await ServiceReport.find({idTechnician});
